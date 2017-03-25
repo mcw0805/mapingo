@@ -156,7 +156,7 @@ public class MakeOrderActivity extends AppCompatActivity {
      * @param longValue - an object that is thought to be a long
      * @return double A double that is converted form the long param
      */
-    private static double convertDouble(Object longValue) {
+    static double convertDouble(Object longValue) {
         double valueTwo = -1; // whatever to state invalid!
 
         if (longValue instanceof Long) {

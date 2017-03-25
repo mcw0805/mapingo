@@ -27,6 +27,7 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
     private TextView refNumValue;
     private TextView latitudeText;
     private TextView longitudeText;
+    private TextView distanceText;
     private Button finishButton;
     private DatabaseReference mRootRef;
     private DatabaseReference mNumOrdersRef;
@@ -35,14 +36,17 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
    Variables to enable GPS functionality
     */
     private boolean signalFound;
-    private double gpsLatitude;
-    private double gpsLongitude;
+    private double gpsLatitude = -1000;
+    private double gpsLongitude = -1000;
     private LocationManager locationManager;
 
     private static final String[] INITIAL_PERMS = {
             android.Manifest.permission.ACCESS_FINE_LOCATION,
     };
     private static final int INITIAL_REQUEST = 1337;
+
+    private double shopLatitude = -1000;
+    private double shopLongitude = -1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,7 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
 
         latitudeText = (TextView) findViewById(R.id.latitude_text);
         longitudeText = (TextView) findViewById(R.id.longitude_text);
+        distanceText = (TextView) findViewById(R.id.distance_text);
 
         refNumValue = (TextView) findViewById(R.id.ref_num_value);
 
@@ -77,12 +82,37 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
 
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        mNumOrdersRef = mRootRef.child("shops").child(storeUID).child("orders").child(orderKey).child("orderNum");
+        DatabaseReference mShopRef = mRootRef.child("shops").child(storeUID);
+        mNumOrdersRef = mShopRef.child("orders").child(orderKey).child("orderNum");
         mNumOrdersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 refNumValue.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mShopRef.child("latitude").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                shopLatitude = MakeOrderActivity.convertDouble(dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mShopRef.child("longitude").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                shopLongitude = MakeOrderActivity.convertDouble(dataSnapshot.getValue());
             }
 
             @Override
@@ -118,6 +148,12 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
 
         latitudeText.setText(Double.toString(gpsLatitude));
         longitudeText.setText(Double.toString(gpsLongitude));
+        int distance = (int) getDistance();
+        if (distance > 0) {
+            distanceText.setText(Integer.toString(distance) + "m");
+        } else {
+            distanceText.setText("Unknown");
+        }
     }
 
     @Override
@@ -133,5 +169,27 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    public double getDistance() {
+
+        Log.d("DIST", "SHOP LATITUDE" + Double.toHexString(shopLatitude));
+        Log.d("DIST", "SHOP LONGITUDE" + Double.toHexString(shopLongitude));
+        Log.d("DIST", "GPS LATITUDE" + Double.toHexString(gpsLatitude));
+        Log.d("DIST", "GPS LONGITUDE" + Double.toHexString(gpsLongitude));
+
+        if (gpsLatitude > -1000 && gpsLongitude > -1000 && shopLatitude > -1000 && shopLongitude > -1000) {
+            double earthRadius = 6371000; //meters
+            double dLat = Math.toRadians(shopLatitude - gpsLatitude);
+            double dLng = Math.toRadians(shopLongitude - gpsLongitude);
+            double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(Math.toRadians(gpsLatitude)) * Math.cos(Math.toRadians(shopLatitude)) *
+                            Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            double dist = (double) (earthRadius * c);
+            return dist;
+        } else {
+            return -1;
+        }
     }
 }

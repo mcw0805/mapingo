@@ -63,7 +63,7 @@ angular.module('manageStore').component('manageStore', {
         self.longitudeRefObject.$loaded(
             function (data) {
                 var val = data.$value;
-                var defaultlongitude = 84.3240;
+                var defaultlongitude = -84.3240;
                 self.longitude = defaultlongitude;
                 if (val == null || val == "") {
                     self.storeRef.child("longitude").set(defaultlongitude);
