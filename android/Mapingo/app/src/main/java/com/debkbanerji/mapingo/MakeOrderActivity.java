@@ -9,12 +9,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,10 @@ public class MakeOrderActivity extends AppCompatActivity {
     private DatabaseReference mRootRef;
     private DatabaseReference mShopRef;
     private DatabaseReference mMenuItemRef;
+    private DatabaseReference mOrdersRef;
+    private DatabaseReference mNumOrdersRef;
+    private int numOrders;
+    private String storeUID;
 
 
     @Override
@@ -71,11 +77,26 @@ public class MakeOrderActivity extends AppCompatActivity {
         mRootRef = FirebaseDatabase.getInstance().getReference();
 
         Intent intent = getIntent();
-        String storeUID = intent.getStringExtra("storeUID");
+        storeUID = intent.getStringExtra("storeUID");
 
-//        Log.d("UID", storeUID);
 
         mShopRef = mRootRef.child("shops").child(storeUID);
+
+        mOrdersRef = mShopRef.child("orders");
+
+        mNumOrdersRef = mShopRef.child("num-orders");
+        mNumOrdersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                numOrders = (int) convertDouble(dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         mMenuItemRef = mShopRef.child("menu");
         mMenuItemRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -113,6 +134,20 @@ public class MakeOrderActivity extends AppCompatActivity {
 
     private void submitOrder() {
         Intent submitOrderIntent = new Intent(MakeOrderActivity.this, OrderConfirmationActivity.class);
+        int orderNum = numOrders;
+        Order order = new Order(orderItems, orderNum + 1);
+
+        String orderKey = mOrdersRef.push().getKey();
+
+        mOrdersRef.child(orderKey).setValue(order);
+
+        mNumOrdersRef.setValue(numOrders + 1);
+
+        Toast.makeText(this, "Order submitted", Toast.LENGTH_SHORT).show();
+
+        submitOrderIntent.putExtra("orderKey", orderKey);
+        submitOrderIntent.putExtra("storeUID", storeUID);
+
         startActivity(submitOrderIntent);
     }
 
