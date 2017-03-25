@@ -4,15 +4,17 @@ angular.module('manageStore').component('manageStore', {
     controller: ['$routeParams', '$route', '$firebaseObject', '$firebaseArray', function manageStoreController($routeParams, $route, $firebaseObject, $firebaseArray) {
         var self = this;
         var user = firebase.auth().currentUser;
-        self.storeRef = firebase.database().ref().child("shops").child(user.uid);
         console.log(user.uid);
+        self.storeRef = firebase.database().ref().child("shops").child(user.uid);
+
+
         self.storeName = "Loading...";
         self.newStoreName = "";
 
         self.nameRefObject = $firebaseObject(self.storeRef.child("name"));
         self.nameRefObject.$loaded(
             function(data) {
-                val = data.$value;
+                var val = data.$value;
                 var defaultStoreName = user.displayName + "\'s store";
                 self.storeName = defaultStoreName;
                 if (val == null || val == "") {
@@ -33,6 +35,56 @@ angular.module('manageStore').component('manageStore', {
                 self.storeRef.child("name").set(self.newStoreName);
                 $route.reload();
             }
-        }
+        };
+
+
+        self.latitude = "Loading...";
+        self.longitude = "Loading...";
+        // self.newLatitude = 0;
+        // self.newLongitude = 0;
+
+        self.latitudeRefObject = $firebaseObject(self.storeRef.child("latitude"));
+        self.latitudeRefObject.$loaded(
+            function(data) {
+                var val = data.$value;
+                var defaultLatitude = 33.7925;
+                self.latitude = defaultLatitude;
+                if (val == null || val == "") {
+                    self.storeRef.child("latitude").set(defaultLatitude);
+                    $route.reload()
+                } else {
+                    self.latitude = val;
+                }
+            },
+            function(error) {
+                console.error("Error:", error);
+            }
+        );
+
+        self.longitudeRefObject = $firebaseObject(self.storeRef.child("longitude"));
+        self.longitudeRefObject.$loaded(
+            function(data) {
+                var val = data.$value;
+                var defaultlongitude = 33.7925;
+                self.longitude = defaultlongitude;
+                if (val == null || val == "") {
+                    self.storeRef.child("longitude").set(defaultlongitude);
+                    $route.reload()
+                } else {
+                    self.longitude = val;
+                }
+            },
+            function(error) {
+                console.error("Error:", error);
+            }
+        );
+
+        self.updateStoreLocation = function () {
+            if (null != self.newLatitude && self.newLatitude != "") {
+                self.storeRef.child("latitude").set(self.newLatitude);
+                self.storeRef.child("longitude").set(self.newLongitude);
+                $route.reload();
+            }
+        };
     }]
 });

@@ -7,10 +7,24 @@
                 <h2>{{$ctrl.storeName}}</h2>
                 <form ng-submit = "$ctrl.updateStoreName()" class="form-inline" style="width: 100%">
                     <div class="form-group" style="margin-top: 1px">
-                        <input id="inputNewStoreName" type="text" placeholder="Input Updated Store Name"
+                        <input id="inputNewStoreName" type="text" placeholder="New Name"
                                ng-model="$ctrl.newStoreName" class="form-control">
                     </div>
                     <input type="submit" class="btn btn-raised btn-success" value="Update Store Name" style="margin-top: 1px">
+                </form>
+            </div>
+            <div class="panel" style="padding: 5px">
+                <h4>Latitude: {{$ctrl.latitude}}</h4>
+                <h4>Longitude: {{$ctrl.longitude}}</h4>
+                <form ng-submit = "$ctrl.updateStoreLocation()" class="form-inline" style="width: 100%">
+                    <div class="form-group" style="margin-top: 1px">
+                        <input id="inputNewLatitude" type="number" step="0.0000000000000001" min="-90" max="90" placeholder="New Latitude"
+                               ng-model="$ctrl.newLatitude" class="form-control">
+                        <br>
+                        <input id="inputNewLongitude" type="number" step="0.0000000000000001" min="-180" max="180" placeholder="New Latitude"
+                               ng-model="$ctrl.newLongitude" class="form-control">
+                    </div>
+                    <input type="submit" class="btn btn-raised btn-success" value="Update Store Location" style="margin-top: 1px">
                 </form>
             </div>
         </div>
