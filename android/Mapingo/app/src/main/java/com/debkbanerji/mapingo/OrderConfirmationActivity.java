@@ -30,7 +30,10 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
     private TextView distanceText;
     private Button finishButton;
     private DatabaseReference mRootRef;
+    private DatabaseReference mShopRef;
+    private DatabaseReference mOrderRef;
     private DatabaseReference mNumOrdersRef;
+    private DatabaseReference mDistanceRef;
 
     /*
    Variables to enable GPS functionality
@@ -63,6 +66,9 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         // setting up LocationManager
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         try {
+//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+//                    0,   // Interval in milliseconds
+//                    0, this);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     500,   // Interval in milliseconds
                     10, this);
@@ -80,15 +86,18 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         String orderKey = intent.getStringExtra("orderKey");
         String storeUID = intent.getStringExtra("storeUID");
 
-
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mShopRef = mRootRef.child("shops").child(storeUID);
-        mNumOrdersRef = mShopRef.child("orders").child(orderKey).child("orderNum");
+        mShopRef = mRootRef.child("shops").child(storeUID);
+        mOrderRef = mShopRef.child("orders").child(orderKey);
+        mDistanceRef = mOrderRef.child("distance");
+        mNumOrdersRef = mOrderRef.child("orderNum");
         mNumOrdersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                refNumValue.setText(dataSnapshot.getValue().toString());
+                Double databaseOrderNum = MakeOrderActivity.convertDouble(dataSnapshot.getValue());
+                databaseOrderNum++;
+                Integer displayNum = databaseOrderNum.intValue();
+                refNumValue.setText(displayNum.toString());
             }
 
             @Override
@@ -127,7 +136,6 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
             @Override
             public void onClick(View v) {
                 backHome();
-
             }
         });
 
@@ -154,6 +162,7 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         } else {
             distanceText.setText("Unknown");
         }
+        writeDistance(distance);
     }
 
     @Override
@@ -173,10 +182,10 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
 
     public double getDistance() {
 
-        Log.d("DIST", "SHOP LATITUDE" + Double.toHexString(shopLatitude));
-        Log.d("DIST", "SHOP LONGITUDE" + Double.toHexString(shopLongitude));
-        Log.d("DIST", "GPS LATITUDE" + Double.toHexString(gpsLatitude));
-        Log.d("DIST", "GPS LONGITUDE" + Double.toHexString(gpsLongitude));
+//        Log.d("DIST", "SHOP LATITUDE" + Double.toHexString(shopLatitude));
+//        Log.d("DIST", "SHOP LONGITUDE" + Double.toHexString(shopLongitude));
+//        Log.d("DIST", "GPS LATITUDE" + Double.toHexString(gpsLatitude));
+//        Log.d("DIST", "GPS LONGITUDE" + Double.toHexString(gpsLongitude));
 
         if (gpsLatitude > -1000 && gpsLongitude > -1000 && shopLatitude > -1000 && shopLongitude > -1000) {
             double earthRadius = 6371000; //meters
@@ -191,5 +200,9 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         } else {
             return -1;
         }
+    }
+
+    public void writeDistance(int distance) { // distance in meters
+        mDistanceRef.setValue(distance);
     }
 }
