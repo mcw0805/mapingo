@@ -70,7 +70,6 @@ public class MakeOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 submitOrder();
-
             }
         });
 

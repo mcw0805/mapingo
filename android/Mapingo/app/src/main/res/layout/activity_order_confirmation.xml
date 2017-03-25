@@ -21,18 +21,59 @@
         android:id="@+id/ref_num_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="num"
-        android:textSize="120sp"
         android:layout_below="@+id/ref_num"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textSize="120sp" />
+
+    <TextView
+        android:id="@+id/location_description_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ref_num_value"
+        android:layout_centerHorizontal="true"
+        android:text="Your Location:"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/finish_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finish"
-        android:layout_below="@+id/ref_num_value"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="96dp" />
+        android:layout_marginBottom="30dp"
+        android:text="I've picked up my order" />
+
+    <TextView
+        android:id="@+id/latitude_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latitude: "
+        android:layout_below="@+id/location_description_text"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/latitude_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/latitude_tag"
+        android:layout_alignBottom="@+id/latitude_tag"
+        android:layout_toEndOf="@+id/latitude_tag"
+        android:text="Unknown" />
+
+    <TextView
+        android:id="@+id/longitude_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/latitude_tag"
+        android:text="Longitude: " />
+
+    <TextView
+        android:id="@+id/longitude_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/longitude_tag"
+        android:layout_alignBottom="@+id/longitude_tag"
+        android:layout_toEndOf="@+id/longitude_tag"
+        android:text="Unknown" />
 </RelativeLayout>
