@@ -111,6 +111,9 @@ angular.module('manageStore').component('manageStore', {
         self.resetNumOrders = function () {
             self.storeRef.child("num-orders").set(0);
             $route.reload()
-        }
+        };
+
+        self.menuRef = self.storeRef.child("menu");
+        self.menuItemsArray = $firebaseArray(self.menuRef);
     }]
 });
