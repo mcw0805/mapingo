@@ -18,7 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 public class HomeActivity extends AppCompatActivity {
 
     //private DatabaseReference mRootReef;
-    private Button makeOrderButton;
+    //private Button makeOrderButton;
+    private Button restaurantChoiceButton;
+    private Button aboutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,24 +42,51 @@ public class HomeActivity extends AppCompatActivity {
 //            }
 //        });
 
-        makeOrderButton = (Button) findViewById(R.id.make_order_button);
-        makeOrderButton.setOnClickListener(new View.OnClickListener() {
+//        makeOrderButton = (Button) findViewById(R.id.make_order_button);
+//        makeOrderButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                makeOrder();
+//
+//            }
+//        });
+
+        aboutButton = (Button) findViewById(R.id.about_button);
+        aboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeOrder();
+                goToAbout();
 
             }
         });
 
+        restaurantChoiceButton = (Button) findViewById(R.id.restaurant_choice_button);
+        restaurantChoiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseShops();
+
+            }
+        });
 
     }
 
 
-    private void makeOrder() {
-        Intent makeOrderIntent = new Intent(HomeActivity.this, MakeOrderActivity.class);
-        makeOrderIntent.putExtra("storeUID", "OPqiWs6UXmffghgHcJDXVgGOmC92");
-        startActivity(makeOrderIntent);
+//    private void makeOrder() {
+//        Intent makeOrderIntent = new Intent(HomeActivity.this, MakeOrderActivity.class);
+//        makeOrderIntent.putExtra("storeUID", "OPqiWs6UXmffghgHcJDXVgGOmC92");
+//        startActivity(makeOrderIntent);
+//
+//    }
 
+    private void goToAbout() {
+        Intent goToAboutIntent = new Intent(HomeActivity.this, AboutActivity.class);
+        startActivity(goToAboutIntent);
+    }
+
+    private void chooseShops() {
+        Intent restaurantChoiceIntent = new Intent(HomeActivity.this, ChooseShopsActivity.class);
+        startActivity(restaurantChoiceIntent);
     }
 
 }

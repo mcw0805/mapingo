@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MakeOrderActivity" />
-        <activity android:name=".OrderConfirmationActivity"></activity>
+        <activity android:name=".OrderConfirmationActivity" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".ChooseShopsActivity"></activity>
     </application>
 
 </manifest>

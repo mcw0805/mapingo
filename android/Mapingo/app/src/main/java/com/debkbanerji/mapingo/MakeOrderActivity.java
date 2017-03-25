@@ -148,6 +148,7 @@ public class MakeOrderActivity extends AppCompatActivity {
         submitOrderIntent.putExtra("storeUID", storeUID);
 
         startActivity(submitOrderIntent);
+        finish();
     }
 
     /**
