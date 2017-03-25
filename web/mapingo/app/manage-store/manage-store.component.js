@@ -115,5 +115,16 @@ angular.module('manageStore').component('manageStore', {
 
         self.menuRef = self.storeRef.child("menu");
         self.menuItemsArray = $firebaseArray(self.menuRef);
+
+        self.newMenuItemName = null;
+        self.newMenuItemPrice = null;
+
+        self.submitMenuItem = function () {
+            if (self.newMenuItemName != null && self.newMenuItemPrice) {
+                self.menuItemsArray.$add({"name": self.newMenuItemName, "price": self.newMenuItemPrice});
+                self.newMenuItemName = null;
+                self.newMenuItemPrice = null;
+            }
+        }
     }]
 });
