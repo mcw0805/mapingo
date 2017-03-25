@@ -1,0 +1,1 @@
+angular.module('mapingoApp', ['ngRoute', 'ngAnimate', 'login', 'firebase', 'navBar', 'manageStore', 'about', 'manageOrders', 'creepyMode']);
