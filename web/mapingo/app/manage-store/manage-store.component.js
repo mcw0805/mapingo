@@ -4,7 +4,7 @@ angular.module('manageStore').component('manageStore', {
     controller: ['$routeParams', '$route', '$firebaseObject', '$firebaseArray', function manageStoreController($routeParams, $route, $firebaseObject, $firebaseArray) {
         var self = this;
         var user = firebase.auth().currentUser;
-        console.log(user.uid);
+        // console.log(user.uid);
         self.storeRef = firebase.database().ref().child("shops").child(user.uid);
 
         self.storeName = "Loading...";
