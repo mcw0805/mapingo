@@ -3,7 +3,16 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="container-fluid">
-            <h2>TODO: Create module 'Manage Store'</h2>
+            <div class="panel" style="padding: 5px">
+                <h2>{{$ctrl.storeName}}</h2>
+                <form ng-submit = "$ctrl.updateStoreName()" class="form-inline" style="width: 100%">
+                    <div class="form-group" style="margin-top: 1px">
+                        <input id="inputNewStoreName" type="text" placeholder="Input Updated Store Name"
+                               ng-model="$ctrl.newStoreName" class="form-control">
+                    </div>
+                    <input type="submit" class="btn btn-raised btn-success" value="Update Store Name" style="margin-top: 1px">
+                </form>
+            </div>
         </div>
     </div>
 </div>
