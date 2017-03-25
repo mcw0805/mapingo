@@ -4,6 +4,11 @@ angular.module('manageOrders').component('manageOrders', {
     controller: ['$routeParams', '$route', '$firebaseObject', '$firebaseArray', function manageOrdersController($routeParams, $route, $firebaseObject, $firebaseArray) {
         var self = this;
         var user = firebase.auth().currentUser;
-        self.manageOrdersRef = firebase.database().ref().child("users").child(user.uid).child("manage-orders");
+        self.ordersRef = firebase.database().ref().child("shops").child(user.uid).child("orders");
+        self.ordersArray = $firebaseArray(self.ordersRef);
+
+        self.deleteOrder = function (orderKey) {
+            self.ordersRef.child(orderKey).set(null);
+        }
     }]
 });
