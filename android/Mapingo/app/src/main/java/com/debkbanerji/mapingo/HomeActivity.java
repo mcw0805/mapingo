@@ -52,8 +52,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    // OPqiWs6UXmffghgHcJDXVgGOmC92
     private void makeOrder() {
         Intent makeOrderIntent = new Intent(HomeActivity.this, MakeOrderActivity.class);
+        makeOrderIntent.putExtra("storeUID", "OPqiWs6UXmffghgHcJDXVgGOmC92");
         startActivity(makeOrderIntent);
 
     }
