@@ -1,9 +1,20 @@
-
 <nav-bar></nav-bar>
 <div class="row">
     <div class="col-xs-12">
         <div class="container-fluid">
-            <h2>TODO: Create module 'Manage Orders'</h2>
+            <div class="panel" style="padding: 5px; padding-left: 10px">
+                <h1>Manage Orders</h1>
+            </div>
+            <div ng-repeat="order in $ctrl.ordersArray">
+                <div class="panel" style="padding: 5px; padding-left: 10px">
+                    <!--{{order}}-->
+                    <h4><b>Order #{{order["orderNum"]}}</b></h4>
+                    <div ng-repeat="item in order.items track by $index">
+                        {{item}}
+                    </div>
+                    <h4>Total Price: {{order["totalPrice"]}}</h4>
+                </div>
+            </div>
         </div>
     </div>
 </div>
