@@ -14,6 +14,7 @@
                 </form>
             </div>
             <div class="panel" style="padding: 5px">
+                <h3>Location</h3>
                 <h4>Latitude: {{$ctrl.latitude}}</h4>
                 <h4>Longitude: {{$ctrl.longitude}}</h4>
                 <form ng-submit = "$ctrl.updateStoreLocation()" class="form-inline" style="width: 100%">
@@ -26,6 +27,19 @@
                     </div>
                     <input type="submit" class="btn btn-raised btn-success" value="Update Store Location" style="margin-top: 1px">
                 </form>
+            </div>
+            <div class="panel" style="padding: 5px">
+                <h3>Total Orders Made: {{$ctrl.numOrders}}</h3>
+                <!--<form ng-submit = "$ctrl.updateNumOrders()" class="form-inline" style="width: 100%">-->
+                    <!--<div class="form-group" style="margin-top: 1px">-->
+                        <!--<input id="inputNewNumOrders" type="text" placeholder="New Name"-->
+                               <!--ng-model="$ctrl.newStoreName" class="form-control">-->
+                    <!--</div>-->
+                    <!--<input type="submit" class="btn btn-raised btn-success" value="Update Store Name" style="margin-top: 1px">-->
+                <!--</form>-->
+                <button class="btn btn-raised btn-success btn-xs" ng-click="$ctrl.resetNumOrders()">
+                    Reset
+                </button>
             </div>
         </div>
     </div>

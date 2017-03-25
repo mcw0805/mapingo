@@ -7,13 +7,12 @@ angular.module('manageStore').component('manageStore', {
         console.log(user.uid);
         self.storeRef = firebase.database().ref().child("shops").child(user.uid);
 
-
         self.storeName = "Loading...";
         self.newStoreName = "";
 
         self.nameRefObject = $firebaseObject(self.storeRef.child("name"));
         self.nameRefObject.$loaded(
-            function(data) {
+            function (data) {
                 var val = data.$value;
                 var defaultStoreName = user.displayName + "\'s store";
                 self.storeName = defaultStoreName;
@@ -25,7 +24,7 @@ angular.module('manageStore').component('manageStore', {
                     self.storeName = val;
                 }
             },
-            function(error) {
+            function (error) {
                 console.error("Error:", error);
             }
         );
@@ -37,15 +36,14 @@ angular.module('manageStore').component('manageStore', {
             }
         };
 
-
         self.latitude = "Loading...";
         self.longitude = "Loading...";
-        // self.newLatitude = 0;
-        // self.newLongitude = 0;
+        self.newLatitude = null;
+        self.newLongitude = null;
 
         self.latitudeRefObject = $firebaseObject(self.storeRef.child("latitude"));
         self.latitudeRefObject.$loaded(
-            function(data) {
+            function (data) {
                 var val = data.$value;
                 var defaultLatitude = 33.7925;
                 self.latitude = defaultLatitude;
@@ -56,16 +54,16 @@ angular.module('manageStore').component('manageStore', {
                     self.latitude = val;
                 }
             },
-            function(error) {
+            function (error) {
                 console.error("Error:", error);
             }
         );
 
         self.longitudeRefObject = $firebaseObject(self.storeRef.child("longitude"));
         self.longitudeRefObject.$loaded(
-            function(data) {
+            function (data) {
                 var val = data.$value;
-                var defaultlongitude = 33.7925;
+                var defaultlongitude = 84.3240;
                 self.longitude = defaultlongitude;
                 if (val == null || val == "") {
                     self.storeRef.child("longitude").set(defaultlongitude);
@@ -74,17 +72,45 @@ angular.module('manageStore').component('manageStore', {
                     self.longitude = val;
                 }
             },
-            function(error) {
+            function (error) {
                 console.error("Error:", error);
             }
         );
 
         self.updateStoreLocation = function () {
-            if (null != self.newLatitude && self.newLatitude != "") {
+            if (null != self.newLatitude && self.newLatitude != "" && null != self.newLongitude && self.newLongitude != "") {
                 self.storeRef.child("latitude").set(self.newLatitude);
                 self.storeRef.child("longitude").set(self.newLongitude);
                 $route.reload();
             }
         };
+
+        self.numOrders = "Loading...";
+        self.newNumOrders = "";
+
+        self.numOrdersObject = $firebaseObject(self.storeRef.child("num-orders"));
+        self.numOrdersObject.$loaded(
+            function (data) {
+                var val = data.$value;
+                var defaultNumOrders = 90;
+                self.numOrders = defaultNumOrders;
+                // if (val == null || val == "") {
+                //     self.storeRef.child("num-orders").set(defaultNumOrders);
+                //     $route.reload()
+                // } else {
+                //     self.numOrders = val;
+                // }
+                self.numOrders = val;
+                // $route.reload()
+            },
+            function (error) {
+                console.error("Error:", error);
+            }
+        );
+
+        self.resetNumOrders = function () {
+            self.storeRef.child("num-orders").set(0);
+            $route.reload()
+        }
     }]
 });
