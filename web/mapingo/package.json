@@ -1,0 +1,25 @@
+
+        {
+        "name": "mapingo",
+  "version": "1.0.0",
+  "description": "Like Tapingo but approximately seventeen and half times better",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcw0805/mapingo.git"
+  },
+  "author": "Chaewon Min and Deb Banerji",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcw0805/mapingo/issues"
+  },
+  "homepage": "https://github.com/mcw0805/mapingo#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  }
+}
