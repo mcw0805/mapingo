@@ -7,7 +7,7 @@
                 <h1>Managing Orders in Creepy Mode</h1>
                 <h4>This is like, super creepy, but food is food.</h4>
             </div>
-            <div ng-repeat="order in $ctrl.ordersArray | orderBy:'distance'">
+            <div ng-repeat="order in $ctrl.ordersArray | orderBy:'ETA'">
                 <div class="panel" style="padding: 5px; padding-left: 10px">
                     <!--{{order}}-->
                     <h4><b>Order #{{order["orderNum"] + 1}}</b></h4>
