@@ -11,10 +11,10 @@
         android:id="@+id/menu_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="11dp"
         android:text="Menu"
-        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_below="@+id/restaurant_name"
         android:layout_alignParentStart="true" />
 
     <ListView
@@ -22,23 +22,22 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@+id/menu_heading"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/order_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Order"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/menu_heading" />
+        android:layout_below="@+id/menu_items"
+        android:layout_alignStart="@+id/menu_heading"
+        android:layout_marginTop="11dp" />
 
     <ListView
         android:id="@+id/order_items"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@+id/order_heading"
-        android:layout_marginTop="5dp"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -46,9 +45,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit Order"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="19dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/restaurant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="temp"
+        android:textSize="18dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/menu_heading"
+        android:layout_marginTop="8dp" />
 
 
 </RelativeLayout>

@@ -25,7 +25,6 @@ public class ChooseShopsActivity extends AppCompatActivity {
     private ListView restaurantLv;
     private List<String> restaurantList;
     private ArrayAdapter<String> restaurantAdapter;
-    private Button goToMenuButton;
     private DatabaseReference mRootRef;
     private DatabaseReference mShopsRef;
     private Map<String, String> restaurantMap;

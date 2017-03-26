@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"
-        android:text="blah blah blah. this app is the bae of all."
+        android:text="Like Tapingo but approximately seventeen and half times better."
         android:textSize="15dp"
         android:layout_below="@+id/about_mapingo"
         android:layout_alignStart="@+id/about_mapingo" />
