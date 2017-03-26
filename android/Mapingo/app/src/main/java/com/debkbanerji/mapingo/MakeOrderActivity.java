@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -31,6 +32,7 @@ public class MakeOrderActivity extends AppCompatActivity {
     private ArrayAdapter<String> menuAdapter;
     private ArrayAdapter<String> orderAdapter;
     private Button submitOrderButton;
+    private TextView restaurantName;
     private DatabaseReference mRootRef;
     private DatabaseReference mShopRef;
     private DatabaseReference mMenuItemRef;
@@ -39,11 +41,16 @@ public class MakeOrderActivity extends AppCompatActivity {
     private int numOrders;
     private String storeUID;
 
+    public MakeOrderActivity() {
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_order);
+
+        restaurantName = (TextView) findViewById(R.id.restaurant_name);
 
         menuItems = new ArrayList<>();
         orderItems = new ArrayList<>();
@@ -80,6 +87,17 @@ public class MakeOrderActivity extends AppCompatActivity {
 
 
         mShopRef = mRootRef.child("shops").child(storeUID);
+        mShopRef.child("name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                restaurantName.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         mOrdersRef = mShopRef.child("orders");
 
