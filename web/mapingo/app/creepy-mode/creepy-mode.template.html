@@ -17,6 +17,8 @@
                     <h4>Total Price: {{order["totalPrice"]}}</h4>
                     <h4>Latitude: {{order["latitude"]}}</h4>
                     <h4>Longitude: {{order["longitude"]}}</h4>
+                    <h4>Traveling Speed (Metres/Second): {{order["speed"]}}</h4>
+                    <h4>ETA: {{order["ETA"]}}</h4>
                     <h4>Distance to Store (Metres): {{order["distance"]}}</h4>
                     <button class="btn btn-raised btn-success btn-xs" ng-click="$ctrl.deleteOrder(order.$id)">
                         Finished

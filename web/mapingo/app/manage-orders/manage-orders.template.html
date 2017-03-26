@@ -6,9 +6,11 @@
                 <h1>Manage Orders</h1>
             </div>
             <div class="panel" style="padding: 5px; padding-left: 10px">
-                <button class="btn btn-raised btn-success btn-xs">
-                    <a href="/creepy-mode">Enable Creepy Mode</a>
-                </button>
+                <a href="/creepy-mode">
+                    <button class="btn btn-raised btn-success btn-xs">
+                        Enable Creepy Mode
+                    </button>
+                </a>
             </div>
             <div ng-repeat="order in $ctrl.ordersArray | orderBy:'distance'">
                 <div class="panel" style="padding: 5px; padding-left: 10px">
@@ -18,6 +20,7 @@
                         {{item}}
                     </div>
                     <h4>Total Price: {{order["totalPrice"]}}</h4>
+                    <h4>Distance to Store (Metres): {{order["distance"]}}</h4>
                     <!--<h4>Distance to Store (Metres): {{order["distance"]}}</h4>-->
                     <button class="btn btn-raised btn-success btn-xs" ng-click="$ctrl.deleteOrder(order.$id)">
                         Finished

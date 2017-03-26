@@ -117,6 +117,9 @@ public class MakeOrderActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 numOrders = (int) convertDouble(dataSnapshot.getValue());
+                if (numOrders < 0) {
+                    numOrders = 1;
+                }
             }
 
             @Override
