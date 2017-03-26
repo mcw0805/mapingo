@@ -7,7 +7,7 @@
                 <h1>Managing Orders in Creepy Mode</h1>
                 <h4>This is like, super creepy, but food is food.</h4>
             </div>
-            <div ng-repeat="order in $ctrl.ordersArray | orderBy:'ETA'">
+            <div ng-repeat="order in $ctrl.ordersArray | orderBy:'distance'">
                 <div class="panel" style="padding: 5px; padding-left: 10px">
                     <!--{{order}}-->
                     <h4><b>Order #{{order["orderNum"] + 1}}</b></h4>
@@ -17,8 +17,8 @@
                     <h4>Total Price: ${{order["totalPrice"]}}</h4>
                     <h4>Latitude: {{order["latitude"]}}</h4>
                     <h4>Longitude: {{order["longitude"]}}</h4>
-                    <h4>Traveling Speed (Metres/Second): {{order["speed"]}}</h4>
-                    <h4>ETA (Minutes): {{order["ETA"]}}</h4>
+                    <!--<h4>Traveling Speed (Metres/Second): {{order["speed"]}}</h4>-->
+                    <!--<h4>ETA (Minutes): {{order["ETA"]}}</h4>-->
                     <h4>Distance to Store (Metres): {{order["distance"]}}</h4>
                     <button class="btn btn-raised btn-success btn-xs" ng-click="$ctrl.deleteOrder(order.$id)">
                         Finished
