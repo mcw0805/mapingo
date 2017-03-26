@@ -1,9 +1,28 @@
-
-<nav-bar></nav-bar>
+<!--<nav-bar></nav-bar>-->
+<creepy-nav-bar></creepy-nav-bar>
 <div class="row">
     <div class="col-xs-12">
         <div class="container-fluid">
-            <h2>TODO: Create module 'Creepy Mode'</h2>
+            <div class="panel" style="padding: 5px; padding-left: 10px">
+                <h1>Manage Orders</h1>
+                <h4>May God Have Mercy on Your Soul</h4>
+            </div>
+            <div ng-repeat="order in $ctrl.ordersArray | orderBy:'distance'">
+                <div class="panel" style="padding: 5px; padding-left: 10px">
+                    <!--{{order}}-->
+                    <h4><b>Order #{{order["orderNum"] + 1}}</b></h4>
+                    <div ng-repeat="item in order.items track by $index">
+                        {{item}}
+                    </div>
+                    <h4>Total Price: {{order["totalPrice"]}}</h4>
+                    <h4>Latitude: {{order["latitude"]}}</h4>
+                    <h4>Longitude: {{order["longitude"]}}</h4>
+                    <h4>Distance to Store (Metres): {{order["distance"]}}</h4>
+                    <button class="btn btn-raised btn-success btn-xs" ng-click="$ctrl.deleteOrder(order.$id)">
+                        Finished
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

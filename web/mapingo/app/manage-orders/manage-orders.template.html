@@ -5,6 +5,11 @@
             <div class="panel" style="padding: 5px; padding-left: 10px">
                 <h1>Manage Orders</h1>
             </div>
+            <div class="panel" style="padding: 5px; padding-left: 10px">
+                <button class="btn btn-raised btn-success btn-xs">
+                    <a href="/creepy-mode">Enable Creepy Mode</a>
+                </button>
+            </div>
             <div ng-repeat="order in $ctrl.ordersArray | orderBy:'distance'">
                 <div class="panel" style="padding: 5px; padding-left: 10px">
                     <!--{{order}}-->
