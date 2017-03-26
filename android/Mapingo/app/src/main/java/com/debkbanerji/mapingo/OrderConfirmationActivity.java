@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class OrderConfirmationActivity extends AppCompatActivity implements LocationListener {
 
     private TextView refNumValue;
@@ -34,6 +38,8 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
     private DatabaseReference mOrderRef;
     private DatabaseReference mNumOrdersRef;
     private DatabaseReference mDistanceRef;
+    private DatabaseReference mSpeedRef;
+    private DatabaseReference mETARef;
 
     /*
    Variables to enable GPS functionality
@@ -50,6 +56,12 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
 
     private double shopLatitude = -1000;
     private double shopLongitude = -1000;
+
+    private double oldDistance = -1;
+    private long oldTime = -1;
+    private final int interval = 1000;
+    int writeSpeedCount = 0;
+    private boolean hasWrittenSpeed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +88,7 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
             // Toast.makeText(getBaseContext(), "Security exception: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
+
         latitudeText = (TextView) findViewById(R.id.latitude_text);
         longitudeText = (TextView) findViewById(R.id.longitude_text);
         distanceText = (TextView) findViewById(R.id.distance_text);
@@ -90,10 +103,14 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         mShopRef = mRootRef.child("shops").child(storeUID);
         mOrderRef = mShopRef.child("orders").child(orderKey);
         mDistanceRef = mOrderRef.child("distance");
+        mSpeedRef = mOrderRef.child("speed");
+        mETARef = mOrderRef.child("ETA");
         mNumOrdersRef = mOrderRef.child("orderNum");
         mDistanceRef.setValue("Unknown");
-        mShopRef.child("latitude").setValue("Unknown");
-        mShopRef.child("longitude").setValue("Unknown");
+        mSpeedRef.setValue("Unknown");
+        mETARef.setValue("Unknown");
+        mOrderRef.child("latitude").setValue("Unknown");
+        mOrderRef.child("longitude").setValue("Unknown");
         mNumOrdersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -142,6 +159,42 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
             }
         });
 
+//        final Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                writeSpeed();
+//            }
+//        }, (long) interval);  //the time is in miliseconds
+
+//        final Handler handler = new Handler();
+//        Timer timer = new Timer();
+//        TimerTask testing = new TimerTask() {
+//            @Override
+//            public void run() {
+////                writeSpeed();
+//                handler.post(new Runnable() {
+//                    public void run() {
+//                        Log.d("speed", "WRITING SPEED");
+//                        if (signalFound) {
+//                            Double savedOldDistance = oldDistance;
+//                            Double newDistance = getDistance();
+//                            oldDistance = newDistance;
+//                            if (savedOldDistance >= 0) {
+//                                Double speed = (newDistance - savedOldDistance) / (interval / 1000.0); //speed in m/s
+//                                Double eta = newDistance / speed;
+//                                mSpeedRef.setValue(speed);
+//                                mETARef.setValue(eta);
+//                            }
+//                        }
+//                    }
+//
+//                });
+//
+//            }
+//        };
+//        timer.schedule(testing, interval);
+
     }
 
     private void backHome() {
@@ -162,10 +215,10 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         int distance = (int) getDistance();
         if (distance > 0) {
             distanceText.setText(Integer.toString(distance) + " metres");
+            writeDistance(distance);
         } else {
             distanceText.setText("Unknown");
         }
-        writeDistance(distance);
     }
 
     @Override
@@ -185,10 +238,10 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
 
     public double getDistance() {
 
-//        Log.d("DIST", "SHOP LATITUDE" + Double.toHexString(shopLatitude));
-//        Log.d("DIST", "SHOP LONGITUDE" + Double.toHexString(shopLongitude));
-//        Log.d("DIST", "GPS LATITUDE" + Double.toHexString(gpsLatitude));
-//        Log.d("DIST", "GPS LONGITUDE" + Double.toHexString(gpsLongitude));
+        Log.d("DIST", "SHOP LATITUDE" + Double.toHexString(shopLatitude));
+        Log.d("DIST", "SHOP LONGITUDE" + Double.toHexString(shopLongitude));
+        Log.d("DIST", "GPS LATITUDE" + Double.toHexString(gpsLatitude));
+        Log.d("DIST", "GPS LONGITUDE" + Double.toHexString(gpsLongitude));
 
         if (gpsLatitude > -1000 && gpsLongitude > -1000 && shopLatitude > -1000 && shopLongitude > -1000) {
             double earthRadius = 6371000; //meters
@@ -211,7 +264,30 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         } else {
             mDistanceRef.setValue("Unknown");
         }
-        mShopRef.child("latitude").setValue(gpsLatitude);
-        mShopRef.child("longitude").setValue(gpsLongitude);
+        mOrderRef.child("latitude").setValue(gpsLatitude);
+        mOrderRef.child("longitude").setValue(gpsLongitude);
+//        writeSpeedCount++;
+//        if (!hasWrittenSpeed) {
+//            writeSpeed();
+//        }
     }
+
+//    private void writeSpeed() {
+//        Log.d("speed", "WRITING SPEED");
+//        if (signalFound) {
+//            Double savedOldDistance = oldDistance;
+//            Long savedOldTime = oldTime;
+//            Double newDistance = getDistance();
+//            oldDistance = newDistance;
+//            oldTime = System.currentTimeMillis();
+//            Long timedifference = System.currentTimeMillis() - savedOldTime;
+//            if (savedOldDistance >= 0) {
+//                hasWrittenSpeed = true;
+//                Double speed = (newDistance - savedOldDistance) / (interval / timedifference); //speed in m/s
+//                Double eta = newDistance / speed;
+//                mSpeedRef.setValue(speed);
+//                mETARef.setValue(eta);
+//            }
+//        }
+//    }
 }

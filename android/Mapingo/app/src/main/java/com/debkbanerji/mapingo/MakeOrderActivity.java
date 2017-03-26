@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 public class MakeOrderActivity extends AppCompatActivity {
 
@@ -40,6 +41,7 @@ public class MakeOrderActivity extends AppCompatActivity {
     private DatabaseReference mNumOrdersRef;
     private int numOrders;
     private String storeUID;
+    private String orderKey;
 
     public MakeOrderActivity() {
     }
@@ -76,7 +78,7 @@ public class MakeOrderActivity extends AppCompatActivity {
         submitOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitOrder();
+                submitOrder(orderKey);
             }
         });
 
@@ -100,6 +102,7 @@ public class MakeOrderActivity extends AppCompatActivity {
         });
 
         mOrdersRef = mShopRef.child("orders");
+        orderKey = mOrdersRef.push().getKey();
 
         mNumOrdersRef = mShopRef.child("num-orders");
         mNumOrdersRef.addValueEventListener(new ValueEventListener() {
@@ -118,7 +121,7 @@ public class MakeOrderActivity extends AppCompatActivity {
         mMenuItemRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d("CHILDADDED", dataSnapshot.toString());
+//                Log.d("CHILDADDED", dataSnapshot.toString());
                 String name = (String) ((Map) dataSnapshot.getValue()).get("name");
                 double price = convertDouble(((Map) dataSnapshot.getValue()).get("price"));
                 menuAdapter.add(name + "      $" + Double.toString(price));
@@ -149,12 +152,15 @@ public class MakeOrderActivity extends AppCompatActivity {
 
     }
 
-    private void submitOrder() {
+    private void submitOrder(String orderKey) {
+        if (orderItems.isEmpty()) {
+            return;
+        }
         Intent submitOrderIntent = new Intent(MakeOrderActivity.this, OrderConfirmationActivity.class);
         int orderNum = numOrders;
-        Order order = new Order(orderItems, orderNum + 1);
+        Order order = new Order(orderItems, orderNum);
 
-        String orderKey = mOrdersRef.push().getKey();
+//        String orderKey = mOrdersRef.push().getKey();
 
         mOrdersRef.child(orderKey).setValue(order);
 
