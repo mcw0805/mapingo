@@ -20,6 +20,7 @@ public class HomeActivity extends AppCompatActivity {
     //private DatabaseReference mRootReef;
     //private Button makeOrderButton;
     private Button restaurantChoiceButton;
+    private Button nearMeButton;
     private Button aboutButton;
 
     @Override
@@ -51,6 +52,24 @@ public class HomeActivity extends AppCompatActivity {
 //            }
 //        });
 
+        restaurantChoiceButton = (Button) findViewById(R.id.restaurant_choice_button);
+        restaurantChoiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseShops();
+
+            }
+        });
+
+        nearMeButton = (Button) findViewById(R.id.near_me_button);
+        nearMeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMaps();
+
+            }
+        });
+
         aboutButton = (Button) findViewById(R.id.about_button);
         aboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,14 +79,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        restaurantChoiceButton = (Button) findViewById(R.id.restaurant_choice_button);
-        restaurantChoiceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseShops();
 
-            }
-        });
 
     }
 
@@ -78,6 +90,11 @@ public class HomeActivity extends AppCompatActivity {
 //        startActivity(makeOrderIntent);
 //
 //    }
+
+    private void goToMaps() {
+        Intent goToMapsIntent = new Intent(HomeActivity.this, MapsActivity.class);
+        startActivity(goToMapsIntent);
+    }
 
     private void goToAbout() {
         Intent goToAboutIntent = new Intent(HomeActivity.this, AboutActivity.class);
