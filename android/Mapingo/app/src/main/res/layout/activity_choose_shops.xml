@@ -26,14 +26,6 @@
         android:layout_below="@+id/restaurants"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:id="@+id/go_to_menu_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp"
-        android:text="Go to Menu" />
 
 
 </RelativeLayout>
