@@ -11,22 +11,22 @@
         android:id="@+id/about_mapingo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="10dp"
         android:text="About Mapingo"
         android:textSize="24sp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/about_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:text="Like Tapingo but approximately seventeen and half times better."
-        android:textSize="15dp"
         android:layout_below="@+id/about_mapingo"
-        android:layout_alignStart="@+id/about_mapingo" />
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Mapingo is like Tapingo, but it's approximately seventeen and half times better. By optimizing orders based on location, Mapingo makes waiting for your food a thing of the past"
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/back_home_button"
@@ -34,8 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="70dp"
-        android:text="Back Home" />
+        android:layout_marginBottom="10dp"
+        android:text="Home" />
 
 
 </RelativeLayout>

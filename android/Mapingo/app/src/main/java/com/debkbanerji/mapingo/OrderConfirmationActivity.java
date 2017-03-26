@@ -32,6 +32,7 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
     private TextView latitudeText;
     private TextView longitudeText;
     private TextView distanceText;
+    private TextView subTotalText;
     private Button finishButton;
     private DatabaseReference mRootRef;
     private DatabaseReference mShopRef;
@@ -40,6 +41,7 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
     private DatabaseReference mDistanceRef;
     private DatabaseReference mSpeedRef;
     private DatabaseReference mETARef;
+    private DatabaseReference mSubtotalRef;
 
     /*
    Variables to enable GPS functionality
@@ -92,6 +94,7 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         latitudeText = (TextView) findViewById(R.id.latitude_text);
         longitudeText = (TextView) findViewById(R.id.longitude_text);
         distanceText = (TextView) findViewById(R.id.distance_text);
+        subTotalText = (TextView) findViewById(R.id.order_subtotal_text);
 
         refNumValue = (TextView) findViewById(R.id.ref_num_value);
 
@@ -106,6 +109,18 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         mSpeedRef = mOrderRef.child("speed");
         mETARef = mOrderRef.child("ETA");
         mNumOrdersRef = mOrderRef.child("orderNum");
+        mSubtotalRef = mOrderRef.child("totalPrice");
+        mSubtotalRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                subTotalText.setText("Order Subtotal: $" + dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         mDistanceRef.setValue("Unknown");
         mSpeedRef.setValue("Unknown");
         mETARef.setValue("Unknown");

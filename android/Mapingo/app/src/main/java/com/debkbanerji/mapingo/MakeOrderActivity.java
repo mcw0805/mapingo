@@ -74,6 +74,14 @@ public class MakeOrderActivity extends AppCompatActivity {
             }
         });
 
+        orderLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                orderItems.remove(position);
+                orderAdapter.notifyDataSetChanged();
+            }
+        });
+
         submitOrderButton = (Button) findViewById(R.id.submit_order_button);
         submitOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override

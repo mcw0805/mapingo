@@ -28,7 +28,7 @@
         android:id="@+id/order_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order"
+        android:text="Your Order"
         android:layout_below="@+id/menu_items"
         android:layout_alignStart="@+id/menu_heading"
         android:layout_marginTop="11dp" />

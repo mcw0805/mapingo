@@ -27,13 +27,32 @@
         android:textSize="120sp" />
 
     <TextView
-        android:id="@+id/location_description_text"
+        android:id="@+id/please_wait_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ref_num_value"
         android:layout_centerHorizontal="true"
-        android:text="Your Location:"
+        android:text="Please Wait Until Your Order Number Is Called"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/order_subtotal_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/please_wait_text"
+        android:layout_centerHorizontal="true"
+        android:text="Order Subtotal: $0.0"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/location_description_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_subtotal_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Your Location"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/finish_button"

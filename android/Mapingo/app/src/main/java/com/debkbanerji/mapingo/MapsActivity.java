@@ -2,6 +2,7 @@ package com.debkbanerji.mapingo;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -48,15 +49,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng emory = new LatLng(33.7925, -84.324);
-        mMap.addMarker(new MarkerOptions().position(emory).title("Marker in Georgia Tech"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(emory));
+//        // Add a marker in Emory and move the camera
+//        LatLng emory = new LatLng(33.7925, -84.324);
+//        mMap.addMarker(new MarkerOptions().position(emory).title("Marker in Emory"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(emory));
 
         mShopRef = FirebaseDatabase.getInstance().getReference().child("shops");
         mShopRefChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                Log.d("CHILDADDED", dataSnapshot.toString());
                 Map<Object, Object> shopLoc = (Map<Object, Object>) dataSnapshot.getValue();
                 Double latitude = (Double) shopLoc.get("latitude");
                 Double longitude = (Double) shopLoc.get("longitude");
@@ -85,6 +87,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         };
-
+        mShopRef.addChildEventListener(mShopRefChildEventListener);
     }
 }
