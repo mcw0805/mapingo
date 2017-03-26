@@ -91,6 +91,9 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         mOrderRef = mShopRef.child("orders").child(orderKey);
         mDistanceRef = mOrderRef.child("distance");
         mNumOrdersRef = mOrderRef.child("orderNum");
+        mDistanceRef.setValue("Unknown");
+        mShopRef.child("latitude").setValue("Unknown");
+        mShopRef.child("longitude").setValue("Unknown");
         mNumOrdersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -152,13 +155,13 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
         gpsLatitude = location.getLatitude();
         gpsLongitude = location.getLongitude();
         signalFound = true;
-        Log.d("UPDATE", "GPSUPDATE");
+//        Log.d("UPDATE", "GPSUPDATE");
 
         latitudeText.setText(Double.toString(gpsLatitude));
         longitudeText.setText(Double.toString(gpsLongitude));
         int distance = (int) getDistance();
         if (distance > 0) {
-            distanceText.setText(Integer.toString(distance) + "m");
+            distanceText.setText(Integer.toString(distance) + " metres");
         } else {
             distanceText.setText("Unknown");
         }
@@ -203,6 +206,12 @@ public class OrderConfirmationActivity extends AppCompatActivity implements Loca
     }
 
     public void writeDistance(int distance) { // distance in meters
-        mDistanceRef.setValue(distance);
+        if (distance > 0) {
+            mDistanceRef.setValue(distance);
+        } else {
+            mDistanceRef.setValue("Unknown");
+        }
+        mShopRef.child("latitude").setValue(gpsLatitude);
+        mShopRef.child("longitude").setValue(gpsLongitude);
     }
 }
