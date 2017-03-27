@@ -1,0 +1,176 @@
+{
+  "shops" : {
+    "2nJKbAGC9Gd34R9fBtls8TC5tBG3" : {
+      "latitude" : 33.7925,
+      "longitude" : -84.324,
+      "menu" : {
+        "-Kg8HBANklwRBwDEAr3T" : {
+          "name" : "Kahuna Burger",
+          "price" : 5.5
+        },
+        "-Kg8HHsKHA7h8Osjovbe" : {
+          "name" : "Royale With Cheese",
+          "price" : 4.43
+        },
+        "-Kg8Ha5BW9tmAB6OLpFa" : {
+          "name" : "Hot Snoopy Doggy",
+          "price" : 1.99
+        },
+        "-Kg8Hhon1yF0AjUXACPe" : {
+          "name" : "Fat Coke",
+          "price" : 0.79
+        },
+        "-Kg8HpewFduK3IGME1Cx" : {
+          "name" : "Straight Fries",
+          "price" : 2.33
+        },
+        "-Kg8IMCvslP-cOop_W7c" : {
+          "name" : "Heart Attack Burger",
+          "price" : 8.99
+        },
+        "-Kg8IOrpb1oYo9dvWnoa" : {
+          "name" : "Gluten Free Coke",
+          "price" : 10.99
+        },
+        "-Kg8JCtg69M4ngzg0hni" : {
+          "name" : "Korean Pork Belly Chocolate Milkshake (not even available in Cook Out)",
+          "price" : 34.58
+        },
+        "-Kg8KCxMSrpu8jzi_qya" : {
+          "name" : "Taco + Pepto Bismol",
+          "price" : 7.45
+        },
+        "-Kg8LEzzeE-j5E1n0KuW" : {
+          "name" : "Burning Buttocks Burrito",
+          "price" : 7.9
+        }
+      },
+      "name" : "Frais Gras",
+      "num-orders" : 5,
+      "orders" : {
+        "-Kg8RgY34bRb3YvAQNRa" : {
+          "ETA" : "Unknown",
+          "distance" : "Unknown",
+          "items" : [ "Hot Snoopy Doggy      $1.99", "Fat Coke      $0.79", "Hot Snoopy Doggy      $1.99" ],
+          "latitude" : "Unknown",
+          "longitude" : "Unknown",
+          "orderNum" : 1,
+          "speed" : "Unknown",
+          "totalPrice" : 4.7700000000000005
+        },
+        "-Kg8RlpLhS-HqYUcoity" : {
+          "ETA" : "Unknown",
+          "distance" : "Unknown",
+          "items" : [ "Royale With Cheese      $4.43", "Hot Snoopy Doggy      $1.99" ],
+          "latitude" : "Unknown",
+          "longitude" : "Unknown",
+          "orderNum" : 2,
+          "speed" : "Unknown",
+          "totalPrice" : 6.42
+        },
+        "-Kg8RpQlVE6i6OdRhziV" : {
+          "ETA" : "Unknown",
+          "distance" : "Unknown",
+          "items" : [ "Royale With Cheese      $4.43", "Hot Snoopy Doggy      $1.99", "Hot Snoopy Doggy      $1.99", "Kahuna Burger      $5.5" ],
+          "latitude" : "Unknown",
+          "longitude" : "Unknown",
+          "orderNum" : 3,
+          "speed" : "Unknown",
+          "totalPrice" : 13.91
+        },
+        "-Kg8Rs-24AXHAjCn5z2t" : {
+          "ETA" : "Unknown",
+          "distance" : "Unknown",
+          "items" : [ "Royale With Cheese      $4.43", "Hot Snoopy Doggy      $1.99", "Fat Coke      $0.79" ],
+          "latitude" : "Unknown",
+          "longitude" : "Unknown",
+          "orderNum" : 4,
+          "speed" : "Unknown",
+          "totalPrice" : 7.21
+        }
+      }
+    },
+    "OPqiWs6UXmffghgHcJDXVgGOmC92" : {
+      "latitude" : 33.7773767,
+      "longitude" : -84.3973503,
+      "menu" : {
+        "-Kg8JdJjSQP0KYvr-cft" : {
+          "name" : "Don't Ask What's in this Nugget",
+          "price" : 4.67
+        },
+        "-Kg8Jjt3dNCzvCY4Mg6G" : {
+          "name" : "Suspicious Sausage Thingy",
+          "price" : 3.35
+        },
+        "-Kg8K5dh108MDhNsgUqw" : {
+          "name" : "Krabby Patty",
+          "price" : 2.25
+        },
+        "-Kg8K_hvIINK_5BR7NPG" : {
+          "name" : "Coke",
+          "price" : 2
+        },
+        "-Kg8KcBisxEvK6dJkPVY" : {
+          "name" : "Diet Coke",
+          "price" : 20
+        },
+        "-Kg8KdtItZMElC1PYDsF" : {
+          "name" : "Vegan Coke",
+          "price" : 200
+        },
+        "-Kg8KnHT-xv0BMUiHF6s" : {
+          "name" : "Diabetes Warning Milkshake",
+          "price" : 6.87
+        },
+        "-Kg8NO7wL4aY5pVLfmlG" : {
+          "name" : "Pi(a)zza",
+          "price" : 8.75
+        }
+      },
+      "name" : "Deb's Super Sketchy Food",
+      "num-orders" : 9,
+      "orders" : {
+        "-Kg90GpZBkV-9t7PDX3Y" : {
+          "ETA" : 78,
+          "distance" : 6623,
+          "items" : [ "Don't Ask What's in this Nugget      $4.67", "Diabetes Warning Milkshake      $6.87" ],
+          "latitude" : 33.79053333333333,
+          "longitude" : -84.32745666666666,
+          "orderNum" : 0,
+          "speed" : 1.41,
+          "totalPrice" : 11.54
+        },
+        "-Kg924s7mVFBUl5lTLke" : {
+          "ETA" : 94,
+          "distance" : 6918,
+          "items" : [ "Coke      $2.0", "Diet Coke      $20.0", "Vegan Coke      $200.0" ],
+          "latitude" : 33.788175,
+          "longitude" : -84.32362499999999,
+          "orderNum" : 4,
+          "speed" : 1.22,
+          "totalPrice" : 222
+        },
+        "-Kg935rQpJfHN1eF_61E" : {
+          "ETA" : 118,
+          "distance" : 6558,
+          "items" : [ "Krabby Patty      $2.25", "Krabby Patty      $2.25", "Krabby Patty      $2.25", "Krabby Patty      $2.25", "Krabby Patty      $2.25", "Krabby Patty      $2.25", "Diet Coke      $20.0" ],
+          "latitude" : 33.787791666666664,
+          "longitude" : -84.32749833333334,
+          "orderNum" : 7,
+          "speed" : 0.92,
+          "totalPrice" : 33.5
+        },
+        "-Kg98f6IEL4RsgcipTsd" : {
+          "ETA" : 146,
+          "distance" : 6694,
+          "items" : [ "Krabby Patty      $2.25", "Krabby Patty      $2.25", "Coke      $2.0" ],
+          "latitude" : 33.78961004,
+          "longitude" : -84.32642434,
+          "orderNum" : 8,
+          "speed" : 0.76,
+          "totalPrice" : 6.5
+        }
+      }
+    }
+  }
+}
